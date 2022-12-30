@@ -21,7 +21,7 @@ def get_grocery_url_and_files(problem_name):
 
 def download(problem_name, use_cache=True):
     url, filename, filename_shuffled = get_grocery_url_and_files(problem_name)
-    zipfilename = f"${filename}.zip"
+    zipfilename = f"{filename}.zip"
     download_to_file_from_url(url, zipfilename, use_cache=use_cache)
     with zipfile.ZipFile(zipfilename, 'r') as zip_ref:
         zip_ref.extractall()
