@@ -1,9 +1,11 @@
 from cd4ml.filenames import get_problem_files
 from cd4ml.utils.utils import download_to_file_from_url
 
+baseUri = "https://raw.githubusercontent.com/alura-cursos/continuous-delivery-for-machine-learning-data/main/"
+
 download_params = {
-    'url': "https://raw.githubusercontent.com/alura-cursos/continuous-delivery-for-machine-learning-data/main/house_data_100000.csv",
-    'url_lookup': "https://raw.githubusercontent.com/alura-cursos/continuous-delivery-for-machine-learning-data/main/zip_lookup.csv"
+    'url': f"{baseUri}/house_data_100000.csv",
+    'url_lookup': f"{baseUri}/zip_lookup.csv"
 }
 
 
