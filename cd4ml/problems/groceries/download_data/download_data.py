@@ -1,6 +1,9 @@
 from cd4ml.filenames import get_problem_files
 from cd4ml.utils.utils import download_to_file_from_url, shuffle_csv_file
 import zipfile
+from pathlib import Path
+import logging
+logger = logging.getLogger(__name__)
 
 download_params = {'key': 'store47-2016',
                    'gcs_bucket': 'raw/main',
@@ -23,6 +26,7 @@ def download(problem_name, use_cache=True):
     url, filename, filename_shuffled = get_grocery_url_and_files(problem_name)
     zipfilename = f"{filename}.zip"
     download_to_file_from_url(url, zipfilename, use_cache=use_cache)
+    logger.info(f'Unzipping: {zipfilename} @ {Path.cwd()}')
     with zipfile.ZipFile(zipfilename, 'r') as zip_ref:
         zip_ref.extractall()
     shuffle_csv_file(filename, filename_shuffled)
