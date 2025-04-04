@@ -25,19 +25,26 @@ pipeline {
     stages {
         stage('Install dependencies') {
             steps {
-                sh 'pip3 install -r requirements.txt'
+                sh '''
+                    python3 -m venv venv
+                    ./venv/bin/pip install --upgrade pip
+                    ./venv/bin/pip install -r requirements.txt
+                '''
             }
         }
+
         stage('Run tests') {
             steps {
-                sh './run_tests.sh'
+                sh './venv/bin/python run_tests.py' // ou adapte conforme seu script
             }
         }
+
         stage('Run ML pipeline') {
             steps {
-                sh 'python3 run_python_script.py pipeline ${problem_name} ${ml_pipeline_params_name} ${feature_set_name} ${algorithm_name} ${algorithm_params_name}'
+                sh "./venv/bin/python run_python_script.py pipeline ${problem_name} ${ml_pipeline_params_name} ${feature_set_name} ${algorithm_name} ${algorithm_params_name}"
             }
-       }
+        }
+
        stage('Production - Register Model and Acceptance Test') {
            when {
               allOf {

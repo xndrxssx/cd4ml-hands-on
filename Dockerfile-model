@@ -1,4 +1,4 @@
-FROM python:3.9-slim-buster
+FROM python:3.13-slim-buster
 
 USER root
 ENV FLUENTD_HOST "fluentd"
@@ -11,7 +11,8 @@ RUN mkdir -p /app/cd4ml/
 WORKDIR /app/cd4ml/
 
 COPY requirements.txt requirements.txt
-RUN pip3 install -r requirements.txt
+RUN python3 -m pip install --upgrade pip && \
+    python3 -m pip install -r requirements.txt
 
 COPY cd4ml .
 
