@@ -35,7 +35,7 @@ pipeline {
 
         stage('Run tests') {
             steps {
-                sh './venv/bin/python run_tests.py' // ou adapte conforme seu script
+                sh 'bash run_tests.sh' // ou adapte conforme seu script
             }
         }
 
